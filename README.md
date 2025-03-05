@@ -9,7 +9,6 @@ This is a C# .NET console application that scrapes the Notorious Plug website to
 Ensure you have the following installed on your system:
 - [.NET SDK](https://dotnet.microsoft.com/en-us/download)
 - [NuGet Package Manager](https://www.nuget.org/)
-- An internet connection (required to fetch data from the website)
 
 ### Installation Steps
 1. Clone the repository or download the source code.
