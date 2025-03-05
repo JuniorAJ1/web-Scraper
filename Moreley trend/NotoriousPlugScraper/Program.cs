@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using HtmlAgilityPack;
 
 class Program
@@ -26,13 +27,20 @@ class Program
             return;
         }
 
+        // HashSet to store unique product names
+        HashSet<string> seenProducts = new HashSet<string>();
+
         foreach (var shoe in shoeNodes)
         {
             // Get product name
             var nameNode = shoe.SelectSingleNode(".//h2[@class='ProductItem__Title Heading']/a");
             string name = nameNode != null ? nameNode.InnerText.Trim() : "Unknown";
 
-            // Get product price (Shopify usually stores it in .ProductItem__Price or a similar class)
+            // Avoid duplicates
+            if (seenProducts.Contains(name)) continue;
+            seenProducts.Add(name);
+
+            // Get product price
             var priceNode = shoe.SelectSingleNode(".//span[contains(@class, 'ProductItem__Price')]");
             string price = priceNode != null ? priceNode.InnerText.Trim() : "Price not found";
 
